@@ -10,16 +10,16 @@ namespace test_facebook.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class FacebookController : ControllerBase
+    public class FacebookWebController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        private readonly ILogger<FacebookController> _logger;
+        private readonly ILogger<FacebookWebController> _logger;
 
-        public FacebookController(ILogger<FacebookController> logger)
+        public FacebookWebController(ILogger<FacebookWebController> logger)
         {
             _logger = logger;
         }

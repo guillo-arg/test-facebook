@@ -41,7 +41,7 @@ namespace test_facebook.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(RequestDTO requestDTO)
         {
-            _logger.LogInformation(JsonSerializer.Serialize(requestDTO));
+            _logger.LogInformation("Entro a post");
             return Ok();
         }
 

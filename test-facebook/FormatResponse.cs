@@ -66,7 +66,7 @@ namespace test_facebook
 
 
                        
-                        await context.Response.WriteAsync(FinalResponse);
+                        await context.Response.WriteAsync(newContent);
                     }
                 }
             }

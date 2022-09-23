@@ -36,9 +36,13 @@ namespace test_facebook
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseFormatResponse();
+
             app.UseHttpsRedirection();
 
+
             app.UseRouting();
+
 
             app.UseAuthorization();
 

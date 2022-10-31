@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Security.Policy;
@@ -58,7 +59,11 @@ namespace test_facebook.Controllers
         {
             _logger.LogInformation("Entro a post");
 
-            string json = JsonConvert.SerializeObject(HttpContext.Request.Body);
+            var stream = Request.Body;                  
+            var originalReader = new StreamReader(stream);
+            var body = await originalReader.ReadToEndAsync();
+
+            string json = JsonConvert.SerializeObject(body);
 
             string xHubSignatureSha1 = Request.Headers["X-Hub-Signature"];
             string xHubSignatureSha256 = Request.Headers["X-Hub-Signature-256"];

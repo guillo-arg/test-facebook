@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,10 +55,21 @@ namespace test_facebook.Controllers
         {
             _logger.LogInformation("Entro a post");
 
+            string json = JsonConvert.SerializeObject(requestDTO);
+
             string xHubSignatureSha1 = Request.Headers["X-Hub-Signature"];
             string xHubSignatureSha256 = Request.Headers["X-Hub-Signature-256"];
             _logger.LogInformation($"X-Hub-Signature: {xHubSignatureSha1}");
             _logger.LogInformation($"X-Hub-Signature-256: {xHubSignatureSha256}");
+            _logger.LogInformation($"json: {json}");
+
+
+            if (string.IsNullOrEmpty(xHubSignatureSha256))
+            {
+                return Forbid();
+            }
+
+
 
 
             return Ok();

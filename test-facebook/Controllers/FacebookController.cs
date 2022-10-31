@@ -18,10 +18,12 @@ namespace test_facebook.Controllers
         };
 
         private readonly ILogger<FacebookWebtokenController> _logger;
+        private readonly string _token;
 
         public FacebookWebtokenController(ILogger<FacebookWebtokenController> logger)
         {
             _logger = logger;
+            _token = "EABIwcGfg7ZCIBAFmVwg3MS09LG1kWckuotVrMDGEYSFuhpt3Av6nR05mgWF2mQltFOvPoZCgZARPvr26nOXuKziwPJyiXGiWG5IZCQRrPNOwCwkI11li00DZA7IyR1KZCMJlsXqKfd4i5nZCPYxtL3Qk9gsPyH6Wn2IVLWHQ8IK1kwEAyIDSz8M";
         }
 
         [HttpGet]
@@ -33,7 +35,16 @@ namespace test_facebook.Controllers
             _logger.LogInformation($"Content-type: {Request.ContentType}");
             _logger.LogInformation($"X-Forwarded-For: {Request.Headers["X-Forwarded-For"]}");
 
-            return Ok(response);
+            if (_token == token)
+            {
+                return Ok(response);
+            }
+            else
+            {
+                return Forbid();
+            }
+
+
 
             
         }
@@ -42,6 +53,15 @@ namespace test_facebook.Controllers
         public async Task<IActionResult> Post(RequestDTO requestDTO)
         {
             _logger.LogInformation("Entro a post");
+
+            string xHubSignatureSha1 = Request.Headers["X-Hub-Signaturesha1"];
+            string xHubSignatureSha256 = Request.Headers["X-Hub-Signature-256sha256"];
+            _logger.LogInformation($"X-Hub-Signaturesha1: {xHubSignatureSha1}");
+            _logger.LogInformation($"X-Hub-Signature-256sha256: {xHubSignatureSha1}");
+
+ 
+
+
             return Ok();
         }
 

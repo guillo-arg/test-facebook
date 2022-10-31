@@ -58,7 +58,7 @@ namespace test_facebook.Controllers
         {
             _logger.LogInformation("Entro a post");
 
-            string json = JsonConvert.SerializeObject(requestDTO);
+            string json = JsonConvert.SerializeObject(HttpContext.Request.Body);
 
             string xHubSignatureSha1 = Request.Headers["X-Hub-Signature"];
             string xHubSignatureSha256 = Request.Headers["X-Hub-Signature-256"];

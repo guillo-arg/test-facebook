@@ -66,6 +66,7 @@ namespace test_facebook.Controllers
             _logger.LogInformation($"X-Hub-Signature: {xHubSignatureSha1}");
             _logger.LogInformation($"X-Hub-Signature-256: {xHubSignatureSha256}");
             _logger.LogInformation($"json: {json}");
+            _logger.LogInformation($"token: {_token}");
 
 
             if (string.IsNullOrEmpty(xHubSignatureSha256))

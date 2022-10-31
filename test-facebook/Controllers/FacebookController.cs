@@ -54,12 +54,10 @@ namespace test_facebook.Controllers
         {
             _logger.LogInformation("Entro a post");
 
-            string xHubSignatureSha1 = Request.Headers["X-Hub-Signaturesha1"];
-            string xHubSignatureSha256 = Request.Headers["X-Hub-Signature-256sha256"];
-            _logger.LogInformation($"X-Hub-Signaturesha1: {xHubSignatureSha1}");
-            _logger.LogInformation($"X-Hub-Signature-256sha256: {xHubSignatureSha1}");
-
- 
+            string xHubSignatureSha1 = Request.Headers["X-Hub-Signature"];
+            string xHubSignatureSha256 = Request.Headers["X-Hub-Signature-256"];
+            _logger.LogInformation($"X-Hub-Signature: {xHubSignatureSha1}");
+            _logger.LogInformation($"X-Hub-Signature-256: {xHubSignatureSha256}");
 
 
             return Ok();

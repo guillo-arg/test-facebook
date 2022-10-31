@@ -51,6 +51,7 @@ namespace test_facebook
                         _logger.LogInformation($"path: {context.Request.Path}");
                         _logger.LogInformation($"content-type:{context.Request.ContentType}");
                         _logger.LogInformation($"queryString: {context.Request.QueryString}");
+                        context.Request.Headers.Add("originalContent", originalContent);
 
                         var requestData = Encoding.UTF8.GetBytes(originalContent);
                         stream = new MemoryStream(requestData);

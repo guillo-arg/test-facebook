@@ -59,14 +59,10 @@ namespace test_facebook.Controllers
         {
             _logger.LogInformation("Entro a post");
 
-            var stream = Request.Body;                  
-            var originalReader = new StreamReader(stream);
-            var body = await originalReader.ReadToEndAsync();
-
-            string json = JsonConvert.SerializeObject(body);
 
             string xHubSignatureSha1 = Request.Headers["X-Hub-Signature"];
             string xHubSignatureSha256 = Request.Headers["X-Hub-Signature-256"];
+            string json = Request.Headers["originalContent"];
             _logger.LogInformation($"X-Hub-Signature: {xHubSignatureSha1}");
             _logger.LogInformation($"X-Hub-Signature-256: {xHubSignatureSha256}");
             _logger.LogInformation($"json: {json}");

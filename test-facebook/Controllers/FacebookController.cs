@@ -73,9 +73,16 @@ namespace test_facebook.Controllers
                 return Forbid();
             }
 
-            string sign = CalculateSignature(_token, json);
+           // string sign = CalculateSignature(_token, json);
 
-            _logger.LogInformation($"Firma App: {sign}");
+            //_logger.LogInformation($"Firma App: {sign}");
+
+            string sign = MyAction(json, _token);
+
+            _logger.LogInformation($"Firma app2: {sign}");
+
+
+
 
 
 
@@ -131,6 +138,40 @@ namespace test_facebook.Controllers
         {
             string hex = BitConverter.ToString(ba);
             return hex.Replace("-", "");
+        }
+
+
+
+
+        public string MyAction(string json, string key)
+        {
+
+
+            var hmac = SignWithHmac(UTF8Encoding.UTF8.GetBytes(json), UTF8Encoding.UTF8.GetBytes(key));
+            var hmacHex = ConvertToHexadecimal(hmac);
+
+            return hmacHex;
+
+        }
+
+
+        private static byte[] SignWithHmac(byte[] dataToSign, byte[] keyBody)
+        {
+            using (var hmacAlgorithm = new System.Security.Cryptography.HMACSHA1(keyBody))
+            {
+                return hmacAlgorithm.ComputeHash(dataToSign);
+            }
+        }
+
+        private static string ConvertToHexadecimal(IEnumerable<byte> bytes)
+        {
+            var builder = new StringBuilder();
+            foreach (var b in bytes)
+            {
+                builder.Append(b.ToString("x2"));
+            }
+
+            return builder.ToString();
         }
 
 
